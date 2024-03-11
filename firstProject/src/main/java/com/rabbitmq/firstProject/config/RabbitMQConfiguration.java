@@ -32,7 +32,6 @@ public class RabbitMQConfiguration {
     }
 
 
-
 //    @Bean
 //    public TopicExchange exchange(){
 //        return new TopicExchange(exchange);
@@ -47,33 +46,34 @@ public class RabbitMQConfiguration {
 //        return BindingBuilder.bind(JsonQueue()).to(exchange()).with(jsonRoutingKey);
 //    }
 
-    @Bean
-    public FanoutExchange exchange(){
-        return new FanoutExchange(exchange);
-    }
-    @Bean
-    public Binding binding(){
-        return BindingBuilder.bind(queue()).to(exchange());
-    }
-
-    @Bean
-    public Binding jsonBinding(){
-        return BindingBuilder.bind(JsonQueue()).to(exchange());
-    }
-
-
 //    @Bean
-//    public DirectExchange exchange(){
-//        return new DirectExchange(exchange);
+//    public FanoutExchange exchange(){
+//        return new FanoutExchange(exchange);
 //    }
 //    @Bean
 //    public Binding binding(){
-//        return BindingBuilder.bind(queue()).to(exchange()).with(routingKey);
+//        return BindingBuilder.bind(queue()).to(exchange());
 //    }
+//
 //    @Bean
 //    public Binding jsonBinding(){
-//        return BindingBuilder.bind(JsonQueue()).to(exchange()).with(jsonRoutingKey);
+//        return BindingBuilder.bind(JsonQueue()).to(exchange());
 //    }
+
+
+    @Bean
+    public DirectExchange exchange(){
+        return new DirectExchange(exchange);
+    }
+    @Bean
+    public Binding binding(){
+        return BindingBuilder.bind(queue()).to(exchange()).with(routingKey);
+    }
+    @Bean
+    public Binding jsonBinding(){
+        return BindingBuilder.bind(JsonQueue()).to(exchange()).with(jsonRoutingKey);
+    }
+
 
     @Bean
     public MessageConverter converter(){
